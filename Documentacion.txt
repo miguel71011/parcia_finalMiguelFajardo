@@ -1,0 +1,70 @@
+DOCUMENTACION
+
+-Listar materias : /slots  - method= GET
+
+-Crear materias : /slots  - method= POST
+	enviar:     {
+      				"nombre": "bd",
+					"semestre": 4
+    			}
+
+-Listar estudiantes: /students - method= GET
+
+-Crear estuadiante: /students - methos= POST
+	enviar: {
+     			"apellido": "fajardo",
+      			"email": "fmigue@gmial.com",
+     		 	"identificacion": "2222",
+      			"nombre": "miguel",
+      			"telefono": "31683923"
+    		}
+
+-Editar estudiante: /students/<idStudent> - method= PUT
+	pasar id del estuadiante
+	enviar: {
+      			"apellido": "",
+      			"email": "mg@gmial.com",
+      			"identificacion": "2222",
+      			"nombre": "",
+      			"telefono": "31683923"
+			}
+			dejando en blanco los campos que no se va editar
+
+-Eliminar estudiante: /students/<idStudent> - method = DELETE
+	pasar id del estudiante y tener en cuenta que ese estudiante no este matriculado en ninguna materias.
+
+-Matricular estudiante a una materia: /slots/<idSlot>/students/<idStudent> - method = POST
+	pasar id de la materia y id del estudiante.
+
+-Listar estudiante matriculado en una materia: /slots/<idSlot>/students - method = GET
+	pasar id de la materia.
+
+-Desmatricular estudiante de una materia: /slots/<idSlot>/students/<idStudent>
+	pasar id de la materia y id del estudiante.
+
+-Listar todas las sesiones: /sessions  - method = GET
+
+-Listar las sesiones de una materia: /slots/<idSlot>/sessions - method = GET
+
+-Crear session: /slots/<idSlot>/sessions
+	pasar id de materia que pertenece a la sesion
+	enviar: {
+	    		"fecha_hora_final": "2021-06-02 20:14:46",
+      			"fecha_hora_inicio": "2021-06-02 20:14:45",
+     		 	"nombre": "clase final"
+			}
+
+-Asistencia de una sesion: /sessions/<idSession>/students
+	pasar id de la sesion. 
+	Entre los datos de cada estudiante en el campo "confirmar_asistencia" tendra una url, la cual permitira confirmar que el estudiante asistio, la ruta se envia por el method= 'PUT':
+	EJEMPLO:
+	{
+      "apellido": "daza",
+      "confirmar_asistencia": "http://127.0.0.1:5000/sessions/8/students/9",
+      "email": "felipe@gmial.com",
+      "id": 9,
+      "identificacion": "2222",
+      "nombre": "jhoan",
+      "telefono": "31683923"
+    }
+	- Confirmar asistencia: http://127.0.0.1:5000/sessions/8/students/9 --method='PUT'
